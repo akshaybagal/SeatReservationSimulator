@@ -76,4 +76,33 @@ public class DAL {
         }
         return trains;
     }
+    
+    public ArrayList<RouteTrainRoute> getRouteResponseFromDB(String trainID){
+        ArrayList<RouteTrainRoute> route = new ArrayList<RouteTrainRoute>();
+        RouteTrainRoute tRoute = null;
+        try(Connection conn = DriverManager.getConnection(Global.getDBURL())){
+            
+            String query = "{ call SAS_GET_TRAIN_ROUTE(?)}";
+            CallableStatement cstmt = conn.prepareCall(query);
+            cstmt.setString("TRAIN_ID", trainID);
+            if(cstmt.execute()){
+                ResultSet result = cstmt.getResultSet();
+                if(result != null){
+                    while(result.next()){
+                        tRoute = new RouteTrainRoute(
+                                result.getInt("STATION_NO_FROM_SOURCE"),
+                                result.getString("STATION_ID"),
+                                result.getDouble("DISTANCE"),
+                                result.getString("ARRIVAL_TIME"),
+                                result.getString("DEPARTURE_TIME")
+                        );
+                        route.add(tRoute);
+                    }
+                }
+            }
+        }catch(Exception e){
+            route = null;
+        }
+        return route;
+    }
 }
