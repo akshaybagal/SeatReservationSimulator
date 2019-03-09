@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.trainressimulator.DAL;
+package com.mycompany.trainressimulator.Data;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,7 +16,9 @@ import com.mycompany.trainressimulator.Global;
 import com.mycompany.trainressimulator.Presentation.RouteTrainRoute;
 import com.mycompany.trainressimulator.Presentation.Train;
 import java.sql.CallableStatement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 /**
@@ -108,5 +110,34 @@ public class DAL {
             route = null;
         }
         return route;
+    }
+    
+    public int reserveSeats(String userID, String trainID, String coachID, int noOfSeats, String date){
+        int statusCode = -1;
+        boolean flag = false;
+        try(Connection conn = DriverManager.getConnection(Global.getDBURL())){
+            String query = "{ call SAS_RESERVE_SEATS(?,?,?,?,?)}";
+            CallableStatement cs = conn.prepareCall(query);
+            cs.setString("USER_ID", userID);
+            cs.setString("TRAIN_ID", trainID);
+            cs.setString("COACH_ID",coachID);
+            cs.setInt("NO_OF_SEATS", noOfSeats);
+            cs.setString("DATE", date);
+            flag = cs.execute();
+            if(flag == true){
+                ResultSet rs = cs.getResultSet();
+                if(rs != null){
+                    while(rs.next()){
+                        statusCode = rs.getInt("RESULT");
+                    }
+                }
+            }
+            
+        }catch(Exception e)
+        {
+            // Log the exception
+            statusCode = -1;
+        }
+        return statusCode;
     }
 }

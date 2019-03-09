@@ -5,7 +5,7 @@
  */
 package com.mycompany.trainressimulator.business;
 
-import com.mycompany.trainressimulator.DAL.DAL;
+import com.mycompany.trainressimulator.Data.DAL;
 import com.mycompany.trainressimulator.Presentation.RouteResponse;
 import com.mycompany.trainressimulator.Presentation.RouteTrainRoute;
 import java.util.ArrayList;
