@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.trainressimulator;
+package com.mycompany.trainressimulator.Presentation;
 
+import com.mycompany.trainressimulator.Presentation.Train;
 import java.util.ArrayList;
 import javax.xml.bind.annotation.XmlElement;
 

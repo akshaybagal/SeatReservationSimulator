@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.trainressimulator;
+package com.mycompany.trainressimulator.DAL;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,6 +11,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 //import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
+import com.mycompany.trainressimulator.Presentation.Coach;
+import com.mycompany.trainressimulator.Global;
+import com.mycompany.trainressimulator.Presentation.RouteTrainRoute;
+import com.mycompany.trainressimulator.Presentation.Train;
 import java.sql.CallableStatement;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;

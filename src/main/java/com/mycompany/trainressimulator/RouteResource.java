@@ -5,6 +5,8 @@
  */
 package com.mycompany.trainressimulator;
 
+import com.mycompany.trainressimulator.Presentation.RouteResponse;
+import com.mycompany.trainressimulator.business.Route;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;

@@ -5,6 +5,8 @@
  */
 package com.mycompany.trainressimulator;
 
+import com.mycompany.trainressimulator.Presentation.Response;
+import com.mycompany.trainressimulator.business.Search;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;

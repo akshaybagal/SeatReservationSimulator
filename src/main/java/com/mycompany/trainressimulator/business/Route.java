@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.trainressimulator;
+package com.mycompany.trainressimulator.business;
 
+import com.mycompany.trainressimulator.DAL.DAL;
+import com.mycompany.trainressimulator.Presentation.RouteResponse;
+import com.mycompany.trainressimulator.Presentation.RouteTrainRoute;
 import java.util.ArrayList;
 
 /**
