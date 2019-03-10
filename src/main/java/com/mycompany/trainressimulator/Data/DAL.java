@@ -16,6 +16,7 @@ import com.mycompany.trainressimulator.Global;
 import com.mycompany.trainressimulator.Presentation.RouteTrainRoute;
 import com.mycompany.trainressimulator.Presentation.Train;
 import com.mycompany.trainressimulator.business.Reserve;
+import com.mycompany.trainressimulator.business.Route;
 import java.sql.CallableStatement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -84,14 +85,15 @@ public class DAL {
         return trains;
     }
     
-    public ArrayList<RouteTrainRoute> getRouteResponseFromDB(String trainID){
+    public int getRouteResponseFromDB(Route routeObj){
+        int statusCode = -1;
         ArrayList<RouteTrainRoute> route = new ArrayList<RouteTrainRoute>();
         RouteTrainRoute tRoute = null;
         try(Connection conn = DriverManager.getConnection(Global.getDBURL())){
             
             String query = "{ call SAS_GET_TRAIN_ROUTE(?)}";
             CallableStatement cstmt = conn.prepareCall(query);
-            cstmt.setString("TRAIN_ID", trainID);
+            cstmt.setString("TRAIN_ID", routeObj.getTrainID());
             if(cstmt.execute()){
                 ResultSet result = cstmt.getResultSet();
                 if(result != null){
@@ -104,13 +106,15 @@ public class DAL {
                                 result.getString("DEPARTURE_TIME")
                         );
                         route.add(tRoute);
+                        statusCode = 0;
                     }
                 }
             }
         }catch(Exception e){
-            route = null;
+            statusCode = -1;
         }
-        return route;
+        routeObj.setRoute(route);
+        return statusCode;
     }
     
     public int reserveSeats(Reserve data){

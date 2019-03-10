@@ -5,6 +5,7 @@
  */
 package com.mycompany.trainressimulator.Presentation;
 
+import com.mycompany.trainressimulator.business.Route;
 import java.util.ArrayList;
 import javax.xml.bind.annotation.XmlElement;
 
@@ -22,9 +23,9 @@ public class RouteDataResponse {
     
     public RouteDataResponse(){}
     
-    public RouteDataResponse(String trainID, ArrayList<RouteTrainRoute> route){
-        this.trainID = trainID;
-        this.route = route;
+    public RouteDataResponse(Route routeObj){
+        this.trainID = routeObj.getTrainID();
+        this.route = routeObj.getRoute();
     }
     
 }

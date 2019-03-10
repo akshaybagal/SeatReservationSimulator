@@ -44,8 +44,8 @@ public class RouteResource {
         //TODO return proper representation object
         //throw new UnsupportedOperationException();
         Route route = new Route(trainID);
-        RouteResponse r = route.getResponse();
-        return r;
+        RouteResponse response = route.getResponse();
+        return response;
     }
 
     /**

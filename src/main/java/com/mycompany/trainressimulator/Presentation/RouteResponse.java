@@ -6,6 +6,7 @@
 package com.mycompany.trainressimulator.Presentation;
 
 import com.mycompany.trainressimulator.Presentation.MetaResponse;
+import com.mycompany.trainressimulator.business.Route;
 import java.util.ArrayList;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -25,10 +26,9 @@ public class RouteResponse {
     
     public RouteResponse(){}
     
-    public RouteResponse(int code, String status,String trainID, ArrayList<RouteTrainRoute> route){
-        meta = new MetaResponse(code, status);
-        data = new RouteDataResponse(trainID, route);
-    
+    public RouteResponse(Route routeObj){
+        meta = new MetaResponse(routeObj.getCode(), routeObj.getStatus());
+        data = new RouteDataResponse(routeObj);
     }
     
     

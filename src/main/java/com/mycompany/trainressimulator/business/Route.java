@@ -17,27 +17,60 @@ import java.util.ArrayList;
 public class Route {
     private String trainID = "";
     private ArrayList<RouteTrainRoute> route = null;
+    
+    private int code = 0;
+    private String  status = "";
+        
     public Route(){}
     
     public Route(String trainID){
         this.trainID = trainID;
     }
     
+    public String getTrainID(){
+        return this.trainID;
+    }
+    
+    public ArrayList<RouteTrainRoute> getRoute(){
+        return this.route;
+    }
+    
+    public int getCode(){
+        return this.code;
+    }
+    
+    public String getStatus(){
+        return this.status;
+    }
+    
+    public void setTrainID(String trainID){
+        this.trainID = trainID;
+    }
+    
+    public void setRoute(ArrayList<RouteTrainRoute> route){
+        this.route = route;
+    }
+    
+    public void setCode(int code){
+        this.code = code;
+    }
+    
+    public void setStatus(String status){
+        this.status = status;
+    }
+    
     public RouteResponse getResponse(){
          DAL dal = new DAL();
-         route = dal.getRouteResponseFromDB(this.trainID);
-         RouteResponse r = prepareResponse();
+         if(dal.getRouteResponseFromDB(this)==0){
+             this.code = 200;
+             this.status = "OK";
+         }
+         else{
+             this.code = 500;
+             this.status = "Error";
+         }
+         RouteResponse r = new RouteResponse(this);
          return r;
     }
     
-    public RouteResponse prepareResponse(){
-        RouteResponse rsp = null;
-        if(this.route != null){
-            rsp = new RouteResponse(200, "OK",this.trainID, this.route);
-        }
-        else{
-            rsp = new RouteResponse(500,"Error",this.trainID,null);
-        }
-        return rsp;
-    }
 }
