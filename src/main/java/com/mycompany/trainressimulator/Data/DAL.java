@@ -15,6 +15,7 @@ import com.mycompany.trainressimulator.Presentation.Coach;
 import com.mycompany.trainressimulator.Global;
 import com.mycompany.trainressimulator.Presentation.RouteTrainRoute;
 import com.mycompany.trainressimulator.Presentation.Train;
+import com.mycompany.trainressimulator.business.Reserve;
 import java.sql.CallableStatement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -112,17 +113,18 @@ public class DAL {
         return route;
     }
     
-    public int reserveSeats(String userID, String trainID, String coachID, int noOfSeats, String date){
+    public int reserveSeats(Reserve data){
         int statusCode = -1;
         boolean flag = false;
+               
         try(Connection conn = DriverManager.getConnection(Global.getDBURL())){
             String query = "{ call SAS_RESERVE_SEATS(?,?,?,?,?)}";
             CallableStatement cs = conn.prepareCall(query);
-            cs.setString("USER_ID", userID);
-            cs.setString("TRAIN_ID", trainID);
-            cs.setString("COACH_ID",coachID);
-            cs.setInt("NO_OF_SEATS", noOfSeats);
-            cs.setString("DATE", date);
+            cs.setString("USER_ID", data.getUserID());
+            cs.setString("TRAIN_ID", data.getTrainID());
+            cs.setString("COACH_ID", data.getCoachID());
+            cs.setInt("NO_OF_SEATS", data.getNoOfSeats());
+            cs.setString("DATE", data.getDate());
             flag = cs.execute();
             if(flag == true){
                 ResultSet rs = cs.getResultSet();
@@ -132,7 +134,6 @@ public class DAL {
                     }
                 }
             }
-            
         }catch(Exception e)
         {
             // Log the exception

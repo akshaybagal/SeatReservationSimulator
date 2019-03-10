@@ -5,6 +5,7 @@
  */
 package com.mycompany.trainressimulator.Presentation;
 
+import com.mycompany.trainressimulator.business.Reserve;
 import javax.xml.bind.annotation.XmlElement;
 
 /**
@@ -23,9 +24,9 @@ public class ReserveDataResponse {
     public String coachID = "";
     public ReserveDataResponse(){}
     
-    public ReserveDataResponse(String userID, String trainID, String coachID){
-        this.userID = trainID;
-        this.trainID = trainID;
-        this.coachID = coachID;
+    public ReserveDataResponse(Reserve reserve){
+        this.userID = reserve.getUserID();
+        this.trainID = reserve.getTrainID();
+        this.coachID = reserve.getCoachID();
     }
 }

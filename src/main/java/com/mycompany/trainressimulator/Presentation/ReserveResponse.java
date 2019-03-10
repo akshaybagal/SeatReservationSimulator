@@ -5,6 +5,7 @@
  */
 package com.mycompany.trainressimulator.Presentation;
 
+import com.mycompany.trainressimulator.business.Reserve;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -23,8 +24,8 @@ public class ReserveResponse {
     
     public ReserveResponse(){}
     
-    public ReserveResponse(int code, String status, String userID, String trainID, String coachID){
-        meta = new MetaResponse(code, status);
-        data = new ReserveDataResponse(userID, trainID, coachID);
+    public ReserveResponse(Reserve reserve){
+        meta = new MetaResponse(reserve.getCode(),reserve.getStatus());
+        data = new ReserveDataResponse(reserve);
     }
 }
