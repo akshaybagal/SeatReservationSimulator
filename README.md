@@ -7,7 +7,7 @@ User can search for required trains based on source station, destination statin 
 User can reserve seats for required type of tarin, type of coach and number of seats.
 
 This backend resources are exposed to front-end using multiple end-points with JSON response.
-Client systems can interact with this back-end system using using end-points exposed by passing required parameters.
+Client systems can interact with this back-end system using end-points exposed by passing required parameters.
 
 Built Using:
 
